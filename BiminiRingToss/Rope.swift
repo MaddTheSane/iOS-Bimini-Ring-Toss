@@ -11,8 +11,8 @@ import SceneKit
 
 class Rope {
     
-    var holder: SCNNode
-    var rope: SCNNode
+    let holder: SCNNode
+    let rope: SCNNode
     
     init() {
         holder = SCNNode()

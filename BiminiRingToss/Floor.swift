@@ -11,7 +11,7 @@ import SceneKit
 
 class Floor {
     
-    var floor: SCNNode
+    let floor: SCNNode
     
     init() {
         let geometry = SCNFloor()

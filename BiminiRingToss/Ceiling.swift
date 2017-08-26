@@ -11,7 +11,7 @@ import SceneKit
 
 class Ceiling {
     
-    var ceiling: SCNNode
+    let ceiling: SCNNode
     
     init() {
         let geometry = SCNBox(width: 50, height: 0.1, length: 50, chamferRadius: 0.0)

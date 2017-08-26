@@ -11,7 +11,7 @@ import SceneKit
 
 class Ring {
     
-    var ring: SCNNode
+    let ring: SCNNode
     
     init() {
         let geometry = SCNTorus(ringRadius: 0.5, pipeRadius: 0.1)
