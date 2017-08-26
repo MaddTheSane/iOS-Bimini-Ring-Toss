@@ -13,10 +13,6 @@ class Floor {
     
     var floor: SCNNode
     
-    func getFloor() -> SCNNode {
-        return floor
-    }
-    
     init() {
         var geometry:SCNGeometry
         geometry = SCNFloor()

@@ -13,10 +13,6 @@ class Ceiling {
     
     var ceiling: SCNNode
     
-    func getCeiling() -> SCNNode {
-        return ceiling
-    }
-    
     init() {
         var geometry:SCNGeometry
         geometry = SCNBox(width: 50, height: 0.1, length: 50, chamferRadius: 0.0)

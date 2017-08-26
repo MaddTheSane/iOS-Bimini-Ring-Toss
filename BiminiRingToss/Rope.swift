@@ -14,14 +14,6 @@ class Rope {
     var holder: SCNNode
     var rope: SCNNode
     
-    func getHolder() -> SCNNode {
-        return holder
-    }
-    
-    func getRope() -> SCNNode {
-        return rope
-    }
-    
     init() {
         holder = SCNNode()
         

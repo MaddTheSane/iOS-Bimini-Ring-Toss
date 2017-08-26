@@ -13,10 +13,6 @@ class Ring {
     
     var ring: SCNNode
     
-    func getRing() -> SCNNode {
-        return ring
-    }
-    
     init() {
         var geometry:SCNGeometry
         geometry = SCNTorus(ringRadius: 0.5, pipeRadius: 0.1)
