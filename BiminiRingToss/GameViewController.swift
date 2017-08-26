@@ -55,10 +55,9 @@ class GameViewController: UIViewController {
         scnScene.physicsWorld.addBehavior(anchor)
         
         /** Generate our rope links **/
-        var cnt:Float = 0.0
         var previousLink = ropeObject.rope
         var links = [SCNNode]()
-        while cnt < 2.0 {
+        for cnt in stride(from: Float(0.0), to: 2.0, by: 0.1) {
             let link = ropeObject.getLink( y: cnt )
             links.append(link)
             
@@ -71,7 +70,6 @@ class GameViewController: UIViewController {
             scnScene.physicsWorld.addBehavior(joint)
             
             previousLink = link
-            cnt += 0.1
         }
     
         /** Attach Ring to end of Rope **/
