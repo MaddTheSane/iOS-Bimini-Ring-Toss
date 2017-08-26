@@ -14,8 +14,7 @@ class Ceiling {
     var ceiling: SCNNode
     
     init() {
-        var geometry:SCNGeometry
-        geometry = SCNBox(width: 50, height: 0.1, length: 50, chamferRadius: 0.0)
+        let geometry = SCNBox(width: 50, height: 0.1, length: 50, chamferRadius: 0.0)
         geometry.materials.first?.diffuse.contents = UIColor.red
         ceiling = SCNNode(geometry: geometry)
         ceiling.position = SCNVector3(x: 0, y: 1, z: 0)

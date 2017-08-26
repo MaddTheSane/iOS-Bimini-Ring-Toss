@@ -17,9 +17,7 @@ class Rope {
     init() {
         holder = SCNNode()
         
-        var geometry:SCNGeometry
-        
-        geometry = SCNSphere(radius: 0.1)
+        let geometry = SCNSphere(radius: 0.1)
         geometry.materials.first?.diffuse.contents = UIColor.blue
         
         rope = SCNNode(geometry: geometry)
@@ -27,14 +25,11 @@ class Rope {
         rope.physicsBody?.mass = 5.0
     }
     
-    func getLink( y:Float ) -> SCNNode {
-        var geometry:SCNGeometry
-        var link:SCNNode
-        
-        geometry = SCNSphere(radius: 0.1)
+    func getLink( y:Float ) -> SCNNode {        
+        let geometry = SCNSphere(radius: 0.1)
         geometry.materials.first?.diffuse.contents = UIColor.green
         
-        link = SCNNode(geometry: geometry)
+        let link = SCNNode(geometry: geometry)
         link.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
         link.physicsBody?.mass = 3.0
         return link

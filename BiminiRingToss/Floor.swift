@@ -14,8 +14,7 @@ class Floor {
     var floor: SCNNode
     
     init() {
-        var geometry:SCNGeometry
-        geometry = SCNFloor()
+        let geometry = SCNFloor()
         geometry.materials.first?.diffuse.contents = UIColor.brown
         floor = SCNNode(geometry: geometry)
         floor.position = SCNVector3(x: 0, y: -10, z: 0)

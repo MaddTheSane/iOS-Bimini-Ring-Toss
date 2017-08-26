@@ -56,10 +56,10 @@ class GameViewController: UIViewController {
         
         /** Generate our rope links **/
         var cnt:Float = 0.0
-        var previousLink: SCNNode = ropeObject.rope
-        var links :[SCNNode] = [SCNNode]()
+        var previousLink = ropeObject.rope
+        var links = [SCNNode]()
         while cnt < 2.0 {
-            let link = ropeObject.getLink( y: Float(cnt) )
+            let link = ropeObject.getLink( y: cnt )
             links.append(link)
             
             let joint = SCNPhysicsBallSocketJoint(

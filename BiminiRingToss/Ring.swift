@@ -14,8 +14,7 @@ class Ring {
     var ring: SCNNode
     
     init() {
-        var geometry:SCNGeometry
-        geometry = SCNTorus(ringRadius: 0.5, pipeRadius: 0.1)
+        let geometry = SCNTorus(ringRadius: 0.5, pipeRadius: 0.1)
         geometry.materials.first?.diffuse.contents = UIColor.blue
         ring = SCNNode(geometry: geometry)
         ring.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
