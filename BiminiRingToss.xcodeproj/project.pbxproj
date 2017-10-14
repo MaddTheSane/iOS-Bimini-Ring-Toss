@@ -50,6 +50,7 @@
 				83FC6E741F4797C300CBB7FD /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		83FC6E741F4797C300CBB7FD /* Products */ = {
 			isa = PBXGroup;

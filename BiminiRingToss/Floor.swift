@@ -17,7 +17,7 @@ class Floor {
         let geometry = SCNFloor()
         geometry.materials.first?.diffuse.contents = UIColor.brown
         floor = SCNNode(geometry: geometry)
-        floor.position = SCNVector3(x: 0, y: -10, z: 0)
+        floor.position = SCNVector3(x: 0, y: -25, z: 0)
         
         let floorShape = SCNPhysicsShape(geometry: geometry, options: nil)
         let floorBody = SCNPhysicsBody(type: .static, shape: floorShape)

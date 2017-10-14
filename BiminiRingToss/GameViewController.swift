@@ -1,14 +1,22 @@
 import UIKit
 import SceneKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, SCNSceneRendererDelegate {
     
     var scnView: SCNView!
     var scnScene: SCNScene!
     var cameraNode: SCNNode!
+    var theRing: SCNNode!
+    var ringObject: Ring!
+    var ropeObject: Rope!
+    
+    var holdingTouch: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        holdingTouch = false
+        
+        /** Setup our scene and spawn our nodes **/
         setupView()
         setupScene()
         setupCamera()
@@ -16,11 +24,36 @@ class GameViewController: UIViewController {
         spawnNodes()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if touches.first != nil {
+            holdingTouch = true
+        }
+        super.touchesBegan(touches, with: event)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if touches.first != nil {
+            holdingTouch = false
+        }
+        super.touchesBegan(touches, with: event)
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer,
+                  updateAtTime time: TimeInterval){
+        if ( holdingTouch ) {
+            ringObject.hold()
+        }
+        
+        ropeObject.clampLinks()
+    }
+    
+    
     func setupView() {
         scnView = self.view as! SCNView
         scnView.showsStatistics = true
         scnView.allowsCameraControl = true
         scnView.autoenablesDefaultLighting = true
+        scnView.delegate = self
     }
     
     func setupScene() {
@@ -31,8 +64,8 @@ class GameViewController: UIViewController {
     func setupCamera() {
         cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
-        cameraNode.position = SCNVector3(x: 0, y: -3, z: 10)
-        //cameraNode.eulerAngles = SCNVector3(-0.2, 0, 0); if we want to tilt down
+        cameraNode.position = SCNVector3(x: 0, y: -2, z: 12)
+        cameraNode.eulerAngles = SCNVector3(-0.3, 0, 0)
         scnScene.rootNode.addChildNode(cameraNode)
     }
     
@@ -45,8 +78,9 @@ class GameViewController: UIViewController {
     }
     
     func spawnNodes() {
-        let ringObject = Ring()
-        let ropeObject = Rope()
+        ringObject = Ring()
+        theRing = ringObject.ring
+        ropeObject = Rope()
         
         /** Setup ceiling and floor **/
         let ceilingObject = Ceiling()
@@ -56,10 +90,9 @@ class GameViewController: UIViewController {
         
         /** Generate our rope links **/
         var previousLink = ropeObject.rope
-        var links = [SCNNode]()
         for cnt in stride(from: Float(0.0), to: 2.0, by: 0.1) {
-            let link = ropeObject.getLink( y: cnt )
-            links.append(link)
+            let link = ropeObject.getLink( y: Float(cnt) )
+            ropeObject.links.append(link)
             
             let joint = SCNPhysicsBallSocketJoint(
                 bodyA: link.physicsBody!,
@@ -74,7 +107,7 @@ class GameViewController: UIViewController {
     
         /** Attach Ring to end of Rope **/
         let joint = SCNPhysicsBallSocketJoint(
-            bodyA: ringObject.ring.physicsBody!,
+            bodyA: theRing.physicsBody!,
             anchorA: SCNVector3(x: 0.6 , y: 0, z: 0),
             bodyB: previousLink.physicsBody!,
             anchorB: SCNVector3(x: 0.05, y: 0.05, z: 0.05)
@@ -85,10 +118,10 @@ class GameViewController: UIViewController {
         scnScene.rootNode.addChildNode(ropeObject.holder)
         ropeObject.holder.addChildNode(ceilingObject.ceiling)
         ropeObject.holder.addChildNode(ropeObject.rope)
-        links.forEach { link in
+        ropeObject.links.forEach { link in
             ropeObject.holder.addChildNode( link )
         }
-        scnScene.rootNode.addChildNode(ringObject.ring)
+        scnScene.rootNode.addChildNode(theRing)
         scnScene.rootNode.addChildNode(floorObject.floor)
     }
 }
